@@ -28,7 +28,7 @@
 
 namespace matrix_hal {
 
-MicrophoneArray::MicrophoneArray() : gain_(8) {
+MicrophoneArray::MicrophoneArray() : gain_(1) {
   raw_data_.resize(kMicarrayBufferSize);
 
   delayed_data_.resize(kMicarrayBufferSize);
@@ -46,7 +46,7 @@ void MicrophoneArray::Setup(WishboneBus* wishbone) {
   MatrixDriver::Setup(wishbone);
 
   // TODO(andres.calderon@admobilize.com): avoid systems calls
-  std::system("gpio edge 6 both");
+  std::system("gpio edge 6 rising");
 
   wiringPiSetupSys();
 
